@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: ACL - Adapter Banco de Horas
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/saldos/{codigoColaborador}':
+    parameters:
+      - schema:
+          type: string
+        name: codigoColaborador
+        in: path
+        required: true
+    get:
+      summary: Obter saldo de horas do Colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Saldo'
+              examples: {}
+      operationId: get-saldo-codigoColaborador
+      description: Obter saldo de horas do colaborador dada sua matrícula Localiza.
+  '/projecoes/{codigoColaborador}':
+    parameters:
+      - schema:
+          type: string
+        name: codigoColaborador
+        in: path
+        required: true
+    get:
+      summary: Obter projeção de horas do Colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Projecao'
+      operationId: get-projecao-codigoColaborador
+      description: Obter projeção de horas dos próximos meses do colaborador dada sua matrícula Localiza.
+components:
+  schemas:
+    Saldo:
+      title: Saldo
+      type: object
+      properties:
+        codigoColaborador:
+          type: string
+        saldo:
+          type: number
+      description: ''
+    Projecao:
+      title: Projecao
+      type: object
+      description: ''
+      properties:
+        mes:
+          type: integer
+        horas:
+          type: number
+        codigoColaborador:
+          type: string
+  securitySchemes: {}

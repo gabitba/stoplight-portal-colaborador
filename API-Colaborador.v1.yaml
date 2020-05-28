@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: API-Colaborador
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/colaboradores/{codigoColaborador}/saldo-horas':
+    parameters:
+      - schema:
+          type: string
+        name: codigoColaborador
+        in: path
+        required: true
+    get:
+      summary: Obter saldo de horas do Colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    $ref: '#/components/schemas/Saldo'
+      operationId: get-colaboradores-codigoColaborador-saldo-horas
+      description: Obter saldo de horas do colaborador dada sua matrícula Localiza.
+  '/colaboradores/{codigoColaborador}/projecao-horas':
+    parameters:
+      - schema:
+          type: string
+        name: codigoColaborador
+        in: path
+        required: true
+    get:
+      summary: Obter projeção de horas do Colaborador
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Projecao'
+      operationId: get-colaboradores-codigoColaborador-projecao-horas
+      description: Obter projeção de horas dos próximos meses do colaborador dada sua matrícula Localiza.
+components:
+  schemas:
+    Saldo:
+      title: Saldo
+      type: object
+      properties:
+        codigoColaborador:
+          type: string
+        saldo:
+          type: number
+    Projecao:
+      title: Projecao
+      type: object
+      properties:
+        codigoColaborador:
+          type: string
+        mes:
+          type: integer
+        horas:
+          type: number
